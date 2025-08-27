@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr-ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Montserrat:400,700&display=swap" />
+
+    <style>
+      :root {
+        --transparent: transparent;
+        --primary: #37ca37;
+        --secondary: #188bf6;
+        --white: #ffffff;
+        --gray: #cbd5e0;
+        --black: #000000;
+        --red: #e93d3d;
+        --orange: #f6ad55;
+        --yellow: #faf089;
+        --green: #9ae6b4;
+        --teal: #81e6d9;
+        --malibu: #63b3ed;
+        --indigo: #757BBD;
+        --purple: #d6bcfa;
+        --pink: #fbb6ce;
+        --overlay: rgba(0, 0, 0, 0.5);
+        --color-met7r3uc: #fff500ff;
+        --arial: 'Arial';
+        --lato: 'Lato';
+        --montserrat: 'Montserrat';
+        --roboto: 'Roboto';
+        --inter: 'Inter';
+        --headlinefont: 'Montserrat';
+        --contentfont: 'Lato';
+        --text-color: #000000;
+        --link-color: #188bf6;
+
+        --cta-accent: #e7f207; /* couleur néon */
+        --cta-bg: #121312;     /* fond bouton */
+        --cta-text: #0b0b0b;   /* texte si tu veux dark on neon */
+      }
+
+      .bg-fixed { bottom: 0; top: 0; left: 0; right: 0; position: fixed; overflow: auto; background-color: var(--white); }
+
+      /* ===============================
+         BASE sombre + halo néon
+         =============================== */
+      #section-bXknEABMxK {
+        --accent: #e7f207;
+        --bg1: #060a09;
+        --bg2: #0a0f0d;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background:
+          radial-gradient(circle at 60% 25%, color-mix(in oklab, var(--accent) 18%, transparent) 0%, transparent 60%),
+          radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 70%),
+          linear-gradient(180deg, var(--bg1), var(--bg2));
+      }
+
+      /* texture subtile */
+      #section-bXknEABMxK::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: .2;
+        background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter>\
+<rect width='100%' height='100%' filter='url(%23n)' opacity='.6'/></svg>");
+        background-size: 250px 250px;
+        mix-blend-mode: soft-light;
+        animation: grainShift 24s linear infinite alternate;
+      }
+
+      @keyframes grainShift {
+        from { transform: scale(1); }
+        to   { transform: scale(1.2); }
+      }
+
+      /* =====================================================
+         BALAYAGE diagonal type flash photobooth
+         ===================================================== */
+      #section-bXknEABMxK .pb-sweep {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          45deg,
+          transparent 0%,
+          color-mix(in oklab, var(--accent) 25%, transparent) 15%,
+          color-mix(in oklab, var(--accent) 60%, transparent) 20%,
+          color-mix(in oklab, var(--accent) 25%, transparent) 25%,
+          transparent 40%
+        );
+        filter: blur(20px);
+        opacity: .4;
+        transform: translate(-120%, -120%) rotate(0deg);
+        animation: pbSweepDiag 10s ease-in-out infinite;
+      }
+
+      @keyframes pbSweepDiag {
+        0%   { transform: translate(-120%, -120%) rotate(0deg); }
+        50%  { transform: translate(120%, 120%) rotate(0deg); }
+        100% { transform: translate(-120%, -120%) rotate(0deg); }
+      }
+
+      /* =====================================================
+         CADRES photobooth (3 flottants + pulse)
+         ===================================================== */
+      #section-bXknEABMxK .pb-frame {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+        width: 38vmin;
+        height: 28vmin;
+        border-radius: 18px;
+        border: 1px solid color-mix(in oklab, var(--accent) 35%, rgba(255, 255, 255, .08));
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, .04) inset,
+                    0 0 26px color-mix(in oklab, var(--accent) 28%, transparent);
+        opacity: .25;
+        backdrop-filter: blur(1px);
+        animation: framePulse 6s ease-in-out infinite alternate;
+      }
+
+      #section-bXknEABMxK .pb-frame.f1 { top: 15%; left: 70%; transform: rotate(-8deg); animation-delay: 0s; }
+      #section-bXknEABMxK .pb-frame.f2 { bottom: 12%; left: 20%; transform: rotate(6deg); animation-delay: 2s; }
+      #section-bXknEABMxK .pb-frame.f3 { top: 40%; right: 10%; transform: rotate(3deg); animation-delay: 4s; }
+
+      @keyframes framePulse {
+        from { transform: scale(1) rotate(var(--angle, 0deg)); opacity: .22; }
+        to   { transform: scale(1.06) rotate(var(--angle, 0deg)); opacity: .33; }
+      }
+
+      /* =====================================================
+         FLASH ponctuel (pop rapide)
+         ===================================================== */
+      #section-bXknEABMxK .pb-flash {
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        top: 35%;
+        left: 45%;
+        background: radial-gradient(circle, color-mix(in oklab, var(--accent) 70%, transparent) 0%, transparent 65%);
+        filter: blur(25px);
+        opacity: 0;
+        z-index: 0;
+        pointer-events: none;
+        animation: flashPop 9s ease-in-out infinite 3s;
+      }
+
+      @keyframes flashPop {
+        0%, 92%, 100% { opacity: 0; transform: scale(.8); }
+        94%           { opacity: .55; transform: scale(1.2); }
+        96%           { opacity: 0; transform: scale(.9); }
+      }
+
+      /* Contenu au-dessus */
+      #section-bXknEABMxK > * { position: relative; z-index: 1; }
+
+      /* ===== CTA button (target actual button element) ===== */
+      #button-w2eguLcrgf_btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .55rem;
+        padding: .95rem 1.25rem;
+        border-radius: 12px;
+        background: linear-gradient(180deg, color-mix(in oklab, var(--cta-accent) 34%, #2a2b2a) 0%, var(--cta-bg) 100%);
+        color: #101310;
+        font-weight: 700;
+        letter-spacing: .2px;
+        text-decoration: none;
+        border: 1px solid color-mix(in oklab, var(--cta-accent) 38%, rgba(255,255,255,.08));
+        box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset,
+                    0 10px 24px -8px color-mix(in oklab, var(--cta-accent) 24%, transparent),
+                    0 0 22px -6px color-mix(in oklab, var(--cta-accent) 26%, transparent);
+        transform: translateZ(0);
+        isolation: isolate;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        animation: cta-breathe 4.5s ease-in-out infinite alternate,
+                   cta-nudge 14s ease-in-out infinite;
+      }
+
+      #button-w2eguLcrgf_btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset,
+                    0 14px 30px -8px color-mix(in oklab, var(--cta-accent) 36%, transparent),
+                    0 0 36px -6px color-mix(in oklab, var(--cta-accent) 38%, transparent);
+      }
+
+      #button-w2eguLcrgf_btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px #0a0a0a,
+                    0 0 0 4px color-mix(in oklab, var(--cta-accent) 55%, transparent);
+      }
+
+      /* Shine diagonal */
+      #button-w2eguLcrgf_btn::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, transparent 20%, rgba(255,255,255,.25) 40%, transparent 60%);
+        mix-blend-mode: screen;
+        opacity: 0;
+        transform: translateX(-140%) rotate(0.001deg);
+        transition: opacity .25s ease;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      #button-w2eguLcrgf_btn:hover::after {
+        opacity: .75;
+        animation: cta-shine 1.2s ease;
+      }
+
+      /* Ripple au clic */
+      #button-w2eguLcrgf_btn:active::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(200px 200px at var(--x,50%) var(--y,50%),
+          color-mix(in oklab, var(--cta-accent) 65%, transparent) 0%,
+          transparent 60%);
+        opacity: .35;
+        transform: scale(.8);
+        animation: cta-ripple .45s ease-out forwards;
+        pointer-events: none;
+      }
+
+      @keyframes cta-breathe {
+        from { filter: brightness(1) saturate(1); }
+        to {
+          filter: brightness(1.08) saturate(1.08);
+          box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset,
+                      0 12px 28px -8px color-mix(in oklab, var(--cta-accent) 30%, transparent),
+                      0 0 32px -6px color-mix(in oklab, var(--cta-accent) 34%, transparent);
+        }
+      }
+
+      @keyframes cta-nudge {
+        0%, 92%, 100% { transform: translateZ(0); }
+        94% { transform: translateY(-1px) rotate(-.3deg); }
+        96% { transform: translateY(0) rotate(.3deg); }
+        98% { transform: translateY(-1px) rotate(0deg); }
+      }
+
+      @keyframes cta-shine {
+        0%   { transform: translateX(-140%); opacity: 0; }
+        45%  { opacity: .8; }
+        100% { transform: translateX(140%); opacity: 0; }
+      }
+
+      @keyframes cta-ripple {
+        to { opacity: 0; transform: scale(1.15); }
+      }
+
+      /* Respect du prefers-reduced-motion */
+      @media (prefers-reduced-motion: reduce) {
+        #button-w2eguLcrgf_btn { animation: none; }
+        #button-w2eguLcrgf_btn:hover::after { animation: none; }
+      }
+
+      /* Utility container styling for demo */
+      .container { max-width: 1170px; margin: 0 auto; padding: 40px 16px; }
+      h1, h2 { margin: 0 0 12px; font-family: var(--headlinefont); }
+      p { font-family: var(--contentfont); }
+
+      /* Fix invalid before-content rule from original snippet */
+      .text-output h1:first-child:before,
+      .text-output h2:first-child:before,
+      .text-output h3:first-child:before,
+      .text-output h4:first-child:before,
+      .text-output h5:first-child:before,
+      .text-output h6:first-child:before,
+      .text-output p:first-child:before {
+        content: ""; /* was '\\' (invalid). */
+        margin-right: 0;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="section-bXknEABMxK" class="bg-fixed">
+      <div class="pb-sweep" aria-hidden="true"></div>
+      <div class="pb-frame f1" aria-hidden="true"></div>
+      <div class="pb-frame f2" aria-hidden="true"></div>
+      <div class="pb-frame f3" aria-hidden="true"></div>
+      <div class="pb-flash" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="text-output" style="text-align:center; margin-bottom: 24px;">
+          <h1><span style="color: var(--white)">Nos PhotoBooth</span></h1>
+        </div>
+
+        <div class="text-output" style="display:flex; gap: 16px; justify-content:center; flex-wrap: wrap; margin-bottom: 28px;">
+          <h2><span style="color: var(--white)">Logo HaloLight</span></h2>
+          <h2><span style="color: var(--white)">La formation</span></h2>
+        </div>
+
+        <div class="text-output" style="text-align:center; margin-bottom: 28px;">
+          <h1><strong><em><span style="color: var(--white)">Titre accrocheur</span></em></strong></h1>
+          <h2><strong><em><span style="color: var(--white)">Sous-titre qui résume la promesse</span></em></strong></h2>
+        </div>
+
+        <div style="text-align:center;">
+          <button id="button-w2eguLcrgf_btn" aria-label="Achat">
+            <span class="button-icon-start"></span>
+            <span class="main-heading-button">Achat</span>
+            <span class="button-icon-end"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Ensure ripple origin follows pointer position on the actual button element
+      document.addEventListener('pointerdown', function (e) {
+        var btn = document.getElementById('button-w2eguLcrgf_btn');
+        if (!btn) return;
+        if (!btn.contains(e.target)) return;
+        var r = btn.getBoundingClientRect();
+        btn.style.setProperty('--x', (e.clientX - r.left) + 'px');
+        btn.style.setProperty('--y', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+    </script>
+  </body>
+  </html>
+
